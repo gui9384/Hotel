@@ -2,16 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[UserController::class,'Index']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('frontend.dashboard.user_dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::middleware('auth')->group(function(){
+    Route::get('/profile',[UserController::class,'UserProfile'])->name('user.profile');
+    Route::get('/logout',[UserController::class,'UserLogout'])->name('user.logout');
+}); 
 require __DIR__.'/auth.php';
 Route::middleware(['auth','roles:admin'])->group(function(){
     Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.dashboard');
