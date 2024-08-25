@@ -13,9 +13,9 @@
                             <a href="index.html">Home</a>
                         </li>
                         <li><i class='bx bx-chevron-right'></i></li>
-                        <li>User Dashboard </li>
+                        <li>User Change Password </li>
                     </ul>
-                    <h3>User Dashboard</h3>
+                    <h3>User Change Password </h3>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
  
             <section class="checkout-area pb-70">
             <div class="container">
-            <form action="{{ route('profile.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('password.change.store')}}" method="post" enctype="multipart/form-data">
             @csrf
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -49,48 +49,39 @@
 
                                 <div class="row">
                                    
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Name <span class="required">*</span></label>
-                                            <input type="text" name="name" id="name" class="form-control" value="{{ $profileData->name }}" >
+                                            <label>Old password <span class="required">*</span></label>
+                                            <input type="password" name="old_password" id="old_password" class="form-control @error('old_password') is-invalid @enderror" >
+                                            @error('old_password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                                         </div>
                                     </div>
                                    
-                                    <div class="col-lg-6 col-md-6">
+                            
+                                    <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Email<span class="required">*</span></label>
-                                            <input type="email" name="email"  class="form-control" value="{{ $profileData->email }}">
+                                            <label>New password <span class="required">*</span></label>
+                                            <input type="password" name="new_password" id="new_password" class="form-control @error('new_password') is-invalid @enderror" >
+                                            @error('new_password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                                        </div>
+                                    </div>              <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Confirm new password <span class="required">*</span></label>
+                                            <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" >
+                                          
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Address <span class="required">*</span></label>
-                                            <input type="address" name="address"  class="form-control" value="{{ $profileData->address }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Phone <span class="required">*</span></label>
-                                            <input type="phone" name="phone"  class="form-control" value="{{ $profileData->phone }}">
-                                        </div>
+                               
                                     </div>
 
 
  
- <div class="col-lg-12 col-md-6">
-        <div class="form-group">
-            <label>Avatar<span class="required">*</span></label>
-            <input type="file" class="form-control" id='image'>
-        </div>
-    </div>
-
-    <div class="col-lg-12 col-md-6">
-        <div class="form-group">
-            <label><span class="required">*</span></label>
-            <img id="showImage"src="{{ (!empty($profileData->photo)) ? url('upload/user_images/'.$profileData->photo) : url('upload/avatar.png')}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
-        </div>
-    </div>
+ 
  
  <button type="submit" class="btn btn-danger">Save Changes </button>
 </div>

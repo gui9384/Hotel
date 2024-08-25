@@ -3,17 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Backend\TeamController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/',[UserController::class,'Index']);
 
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.user_dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function(){
     Route::get('/profile',[UserController::class,'UserProfile'])->name('user.profile');
+    Route::post('/profile/store',[UserController::class,'UserStore'])->name('profile.store');
     Route::get('/logout',[UserController::class,'UserLogout'])->name('user.logout');
+    Route::get('/change/password',[UserController::class,'UserChangePassword'])->name('user.change.password');
+    Route::post('/password/change/store',[UserController::class,'UserChangePasswordStore'])->name('password.change.store');
 }); 
 require __DIR__.'/auth.php';
 Route::middleware(['auth','roles:admin'])->group(function(){
@@ -25,3 +29,15 @@ Route::middleware(['auth','roles:admin'])->group(function(){
     Route::post('/admin/password/update', [AdminController::class, 'AdminUpdatePassword'])->name('admin.password.update');
 }); 
 Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
+
+
+Route::middleware(['auth','roles:admin'])->group(function(){
+// Team all route
+Route::controller(Teamcontroller::class)->group(function(){
+    Route::get('/all/team', 'AllTeam')->name('all.team');
+    Route::get('/add/team', 'AddTeam')->name('add.team');
+    Route::post('/team/store', 'StoreTeam')->name('team.store');
+
+
+}); 
+});
