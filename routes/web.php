@@ -37,7 +37,16 @@ Route::controller(Teamcontroller::class)->group(function(){
     Route::get('/all/team', 'AllTeam')->name('all.team');
     Route::get('/add/team', 'AddTeam')->name('add.team');
     Route::post('/team/store', 'StoreTeam')->name('team.store');
+    Route::get('/edit/team/{id}', 'EditTeam')->name('edit.team');
+    Route::post('/team/update', 'UpdateTeam')->name('team.update');
+    Route::get('/delete/team/{id}', 'DeleteTeam')->name('delete.team');
+
+}); 
+
+Route::controller(Teamcontroller::class)->group(function(){
+    Route::get('/book/area', 'BookArea')->name('book.area');
 
 
 }); 
+
 });

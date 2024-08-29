@@ -42,8 +42,8 @@
 										<td>{{ $item ->position }}</td>
 										<td>{{ $item ->facebook }}</td>
 										<td>
-                                            <a href="" class="btn btn-warning px-3 radius-20">Edit</a>
-                                            <a href="" class="btn btn-danger px-3 radius-20">Delete</a>
+                                            <a href="{{ route('edit.team',$item->id)}}" class="btn btn-warning px-3 radius-20">Edit</a>
+                                            <a href="{{ route('delete.team',$item->id)}}" id="delete" class="btn btn-danger px-3 radius-20">Delete</a>
                                         </td>
 									</tr>
                                     @endforeach
