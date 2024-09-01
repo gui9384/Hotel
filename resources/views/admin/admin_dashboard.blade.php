@@ -106,6 +106,16 @@
 		  } );
 	</script>
 	<!-- data table  CSS -->
+
+	<script src="https://cdn.tiny.cloud/1/x21bl15cspjrv690y4ba3k6prm6tp41jex7ld704ba8tbnor/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+   tinymce.init({
+     selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+     plugins: 'powerpaste advcode table lists checklist',
+     toolbar: 'undo redo | blocks| bold italic | bullist numlist checklist | code | table'
+   });
+</script>
 </body>
 
 </html>

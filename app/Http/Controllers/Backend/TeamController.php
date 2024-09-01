@@ -106,5 +106,43 @@ class TeamController extends Controller
         return view('backend.bookarea.book_area', compact('book'));
 
     }
+    public function BookAreaUpdate(Request $request){
+        $book_id = $request->id;
+        if($request->file('image')){
+
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(1000,1000)->save('upload/bookarea/'.$name_gen);
+            $save_url = 'upload/bookarea/'.$name_gen;
+    
+            BookArea::findOrFail($book_id)->update([
+               'short_title' => $request->short_title,
+                'main_title' => $request->main_title,
+                'short_description' => $request->short_description,
+                'link_url' => $request->link_url,
+                'image' => $save_url,
+            ]);
+            $notification = array(
+                'message' => 'Book Updated Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+
+        }else{
+            BookArea::findOrFail($book_id)->update([
+                'short_title' => $request->short_title,
+                'main_title' => $request->main_title,
+                'short_description' => $request->short_description,
+                'link_url' => $request->link_url,
+               
+                
+            ]);
+            $notification = array(
+                'message' => 'Book area Updated Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
 
 }

@@ -26,8 +26,9 @@
 							
 							<div class="col-lg-8">
 								<div class="card">
-									<form id='myForm' action="{{ route('team.store')}}" method="post" enctype="multipart/form-data">
+									<form id='myForm' action="{{ route('book.area.update')}}" method="post" enctype="multipart/form-data">
 										@csrf
+										<input type="hidden" name='id' value="{{ $book->id}}" >
 									<div class="card-body">
 										<div class="row mb-3">
 											<div class="col-sm-3">
@@ -50,7 +51,7 @@
 												<h6 class="mb-0">Short Description</h6>
 											</div>
 											<div class="form-group col-sm-9 text-secondary">
-												<textarea class="form-control" name="short_desc" placeholder="description ..." rows="3" required="" value="{{ $book->short_desc}}" ></textarea>
+												<textarea name="short_description"  class="form-control"  rows="3" >{{ $book->short_description }}</textarea>
 											</div>
 										</div>
                                         <div class="row mb-3">
