@@ -16,6 +16,8 @@ class RoomTypeController extends Controller
        }
     public function AddRoomType(){
         return view('backend.allroom.roomtype.add_roomtype');
+
+        
     }public function RoomTypeStore(Request $request){
        $roomtype_id=  RoomType::insertGetId([
             'name' => $request->name,

@@ -45,7 +45,7 @@
 
 											@endforeach
                                             <a href="{{ route('edit.room',$roo->id)}}" class="btn btn-warning px-3 radius-20">Edit</a>
-                                            <a href="" id="delete" class="btn btn-danger px-3 radius-20">Delete</a>
+                                            <a href="{{ route('delete.room',$roo->id) }}" id="delete" class="btn btn-danger px-3 radius-20">Delete</a>
                                         </td>
 									</tr>
                                     @endforeach
